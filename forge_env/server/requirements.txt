@@ -1,0 +1,11 @@
+openenv-core>=0.1.0
+fastapi>=0.115.0
+uvicorn>=0.30.0
+pydantic>=2.8.0
+pyyaml>=6.0.0
+pytest>=8.0.0
+gradio>=4.40.0
+matplotlib>=3.8.0
+numpy>=1.26.0
+trl>=0.10.0
+transformers>=4.44.0

@@ -1,0 +1,14 @@
+name: forge-env
+version: 0.1.0
+description: Forge self-improving playbook environment (OpenEnv)
+author: Team Forge
+runtime: python
+python: "3.11"
+entrypoint: forge_env.server.app:app
+package: forge_env
+notes: |
+  Run locally: uvicorn forge_env.server.app:app --host 0.0.0.0 --port 8000
+  Docker: docker build -f forge_env/server/Dockerfile -t forge-env .
+           docker run --rm -p 8000:8000 --read-only --tmpfs /tmp forge-env
+  Learned tools are validated with AST allow-list + subprocess isolation; host
+  isolation requires running the server inside this container (or similar).

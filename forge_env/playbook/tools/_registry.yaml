@@ -1,0 +1,10 @@
+tools:
+  - name: lookup_contact
+    path: tools/builtin/lookup_contact.py
+    enabled: true
+  - name: search_calendar
+    path: tools/builtin/search_calendar.py
+    enabled: true
+  - name: send_email
+    path: tools/builtin/send_email.py
+    enabled: true

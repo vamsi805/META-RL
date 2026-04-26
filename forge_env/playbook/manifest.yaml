@@ -1,0 +1,12 @@
+version: 0
+parent: null
+created_at: "2026-04-25T00:00:00Z"
+edit:
+  type: init
+  target: playbook
+  rationale: initial playbook
+metrics_snapshot:
+  val_accuracy: 0.0
+  prompt_token_count: 0
+  tool_count: 0
+  lesson_count: 0

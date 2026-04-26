@@ -1,0 +1,10 @@
+routes:
+  scheduling:
+    prompts: [planner, executor, reflector, formatter, persona]
+    tools: [search_calendar]
+  email:
+    prompts: [planner, executor, reflector, formatter, persona]
+    tools: [lookup_contact, send_email]
+  shopping:
+    prompts: [planner, executor, reflector, formatter, persona]
+    tools: []

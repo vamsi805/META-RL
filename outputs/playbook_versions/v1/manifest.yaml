@@ -1,0 +1,98 @@
+version: 1
+parent: 0
+reward_components:
+  delta_val: 0.0
+  complexity: -0.0
+  regression: -0.0
+  diversity: 0.02
+  total: 0.02
+metrics_snapshot:
+  prompt_token_count: 119
+  tool_count: 3
+  lesson_count: 4
+snapshot:
+  version: 1
+  parent: 0
+  prompts:
+    executor: 'Take one action at a time.
+
+      Use tools only when they directly reduce uncertainty.
+
+      Stop once constraints are satisfied and return structured final output.
+
+      '
+    formatter: 'Return concise, verifiable outputs.
+
+      Use JSON for structured tasks when possible.
+
+      '
+    planner: 'Break the task into concise sub-goals before taking actions.
+
+      Track constraints explicitly and keep a brief plan.
+
+      '
+    persona: 'You are a practical personal-assistant agent.
+
+      Be clear, polite, and concise.
+
+      '
+    reflector: 'Before finalizing:
+
+      1. Re-read the original task.
+
+      2. List every **constraint** explicitly.
+
+      3. Verify each constraint is addressed.
+
+      4. If not, plan one corrective step.
+
+      '
+  lessons:
+    general: '
+
+      '
+    per_domain/scheduling: '
+
+      '
+    per_domain/email_replies: '
+
+      '
+    per_domain/shopping: '
+
+      '
+  routing:
+    routes:
+      scheduling:
+        prompts:
+        - planner
+        - executor
+        - reflector
+        - formatter
+        - persona
+        tools:
+        - search_calendar
+      email:
+        prompts:
+        - planner
+        - executor
+        - reflector
+        - formatter
+        - persona
+        tools:
+        - lookup_contact
+        - send_email
+      shopping:
+        prompts:
+        - planner
+        - executor
+        - reflector
+        - formatter
+        - persona
+        tools: []
+  tool_count: 3
+  token_count: 119
+  edit_log:
+  - timestamp: '2026-04-25T15:26:56.961322+00:00'
+    action: no_op
+    target: null
+    rationale: ''

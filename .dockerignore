@@ -1,0 +1,10 @@
+.venv
+.git
+__pycache__
+*.pyc
+.pytest_cache
+outputs/smoke_metrics.jsonl
+outputs/playbook_versions
+.cursor
+*.md
+!README.md
