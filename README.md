@@ -1,3 +1,14 @@
+---
+title: Forge OpenEnv Demo
+emoji: 🧠
+colorFrom: blue
+colorTo: green
+sdk: gradio
+app_file: app.py
+pinned: false
+license: bsd-3-clause
+---
+
 # Forge: Self-Improving Playbook Environment
 
 Forge is an **OpenEnv** environment for training an agent to improve its own playbook: prompts, lessons, routing rules, and tools.
@@ -8,7 +19,7 @@ The agent sees failures, proposes structured playbook edits, tests them inside t
 
 Fill these before final submission:
 
-- **Hugging Face Space:** TODO: add Space URL after pushing, for example `https://huggingface.co/spaces/YOUR_NAME/forge-openenv`
+- **Hugging Face Space:** https://huggingface.co/spaces/Vamsi805/forge-openenv
 - **Colab / experiment notebook:** TODO: add Colab share URL. Local steps are in [`docs/REAL_LLM_AND_COLAB.md`](docs/REAL_LLM_AND_COLAB.md)
 - **Mini-blog or video:** TODO: add Hugging Face blog or YouTube URL
 - **GitHub repo:** https://github.com/vamsi805/META-RL
