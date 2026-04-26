@@ -1,1 +1,3 @@
--e .[dev]
+# Hugging Face Spaces mounts this file at /tmp/requirements.txt, so "-e ." resolves to
+# /tmp (no pyproject.toml). Install the package from the app root explicitly.
+forge-env[dev] @ file:///app
