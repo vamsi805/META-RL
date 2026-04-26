@@ -28,6 +28,8 @@ python app.py
 
 That opens the Gradio demo from `demo/app.py`.
 
+**Important:** The Space Docker image runs `pip install -r requirements.txt` **before** it copies your repo into `/app`. So `requirements.txt` must list **only normal PyPI packages**, not `-e .` or `forge-env @ file:///app`. After the copy, `python app.py` runs with working directory `/app`, so `import demo` and `import forge_env` work without a local `pip install`.
+
 ### Google Colab
 
 Colab is for experiments because it gives you a T4 GPU.

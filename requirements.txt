@@ -1,3 +1,12 @@
-# Hugging Face Spaces mounts this file at /tmp/requirements.txt, so "-e ." resolves to
-# /tmp (no pyproject.toml). Install the package from the app root explicitly.
-forge-env[dev] @ file:///app
+# Hugging Face Spaces runs `pip install -r requirements.txt` before `COPY ./ /app`,
+# so you must not install the local package from /app here (pyproject is not there yet).
+# Runtime launches `python app.py` from /app, so `demo` and `forge_env` are importable via sys.path.
+#
+# Gradio is installed by the Space builder after this file (pinned version). Do not pin gradio here.
+openenv-core>=0.1.0
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.8.0
+pyyaml>=6.0.0
+matplotlib>=3.8.0
+tiktoken>=0.7.0
