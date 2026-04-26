@@ -66,7 +66,7 @@ with gr.Blocks(title="Forge Demo") as app:
         man_btn.click(fn=manifest_view, inputs=ver_in, outputs=man_out)
     with gr.Tab("Prompt diff gallery"):
         diff_btn = gr.Button("Diff reflector: v0 disk vs latest checkpoint")
-        diff_out = gr.Code(label="Unified diff", language="plaintext")
+        diff_out = gr.Code(label="Unified diff")
         diff_btn.click(fn=prompt_diff_v0_vs_latest, outputs=diff_out)
     with gr.Tab("Trajectory / metrics replay"):
         rep = gr.Textbox(label="Recent metrics rows", lines=14)
