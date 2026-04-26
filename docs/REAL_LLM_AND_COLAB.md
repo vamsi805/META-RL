@@ -2,6 +2,100 @@
 
 This guide explains how the real model path works and how to run it on a T4 Colab.
 
+## 0. Top-level mental model
+
+There are three different places involved:
+
+```mermaid
+flowchart TD
+    A[GitHub repo] --> B[Hugging Face Space]
+    A --> C[Google Colab]
+    C --> D[Run Qwen experiments]
+    D --> E[outputs metrics and plots]
+    E --> A
+    E --> F[Hugging Face dataset or blog]
+```
+
+### GitHub repo
+
+This is the source code home. You edit code here and push commits.
+
+### Hugging Face Space
+
+This is the public runnable demo for judges.
+
+The Space should run:
+
+```bash
+python app.py
+```
+
+That launches the Gradio app. Judges can open it, see plots, inspect playbook versions, and understand the environment.
+
+### Google Colab
+
+This is where you run GPU experiments. Colab loads Qwen on a T4 GPU and runs:
+
+```bash
+python training/train_forge.py --llm_backend transformers --model_name Qwen/Qwen2.5-1.5B-Instruct --max_steps 3
+```
+
+The experiment writes:
+
+```text
+outputs/smoke_metrics.jsonl
+outputs/plots/*.png
+outputs/playbook_versions/*
+```
+
+Then you download or upload those results.
+
+### Where the model comes from
+
+The model comes from Hugging Face Model Hub.
+
+Good first model:
+
+```text
+Qwen/Qwen2.5-1.5B-Instruct
+```
+
+Bigger T4 model:
+
+```text
+Qwen/Qwen2.5-7B-Instruct
+```
+
+For 7B on T4, use:
+
+```bash
+export FORGE_LLM_LOAD_IN_4BIT=1
+```
+
+### What "training" means here
+
+The current training loop improves the playbook, not the Qwen model weights.
+
+The loop is:
+
+```text
+Qwen proposes edits -> Forge scores edits -> best edit updates playbook -> repeat
+```
+
+So the learned object is the playbook.
+
+### Where Unsloth fits
+
+Unsloth is a faster way to fine-tune model weights on small GPUs.
+
+In this repo, Unsloth is prepared as an integration point, but the current working training path does not fine-tune Qwen weights yet. It uses Qwen as the editor and executor, and improves the playbook.
+
+If you extend this after the hackathon, Unsloth would be used to train Qwen itself to write better edits from rewards.
+
+Be clear in the pitch:
+
+> Forge currently trains the playbook with a reinforcement-learning-style edit loop. Qwen is used to propose and execute, while the accepted playbook versions are the trained artifact.
+
 ## 1. What changed
 
 The old local path used a fake executor. It had a loop, but it did not call a model.
@@ -184,7 +278,7 @@ Runtime -> Change runtime type -> T4 GPU
 Replace the URL with your repo URL.
 
 ```python
-!git clone https://huggingface.co/spaces/YOUR_NAME/YOUR_SPACE_NAME META-RL || git clone https://github.com/YOUR_NAME/META-RL.git
+!git clone https://github.com/vamsi805/META-RL.git
 %cd META-RL
 ```
 

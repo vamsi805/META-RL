@@ -15,7 +15,7 @@ subprocess.run("nvidia-smi", shell=True, check=False)
 import os
 import subprocess
 
-subprocess.run("git clone https://github.com/YOUR_NAME/META-RL.git", shell=True, check=True)
+subprocess.run("git clone https://github.com/vamsi805/META-RL.git", shell=True, check=True)
 os.chdir("META-RL")
 
 # %%

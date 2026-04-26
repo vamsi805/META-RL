@@ -54,6 +54,10 @@ def run_training(cfg: ForgeTrainConfig, smoke: bool = False) -> Path:
         advantages = [r - mean_r for r in rewards]
         best_i = max(range(len(rewards)), key=lambda i: rewards[i])
         best_reward = rewards[best_i]
+        best_advantage = advantages[best_i] if advantages else 0.0
+        # This is a selection-loss proxy for the playbook-edit RL loop. It is not a
+        # neural-network training loss unless a future trainer updates model weights.
+        loss_proxy = float(max(0.0, -best_advantage))
 
         if best_reward > 0:
             obs = env.step(
@@ -88,6 +92,7 @@ def run_training(cfg: ForgeTrainConfig, smoke: bool = False) -> Path:
             "grpo_group_mean": mean_r,
             "grpo_advantages": advantages,
             "grpo_best_index": best_i,
+            "selection_loss_proxy": loss_proxy,
             "curriculum_phase": phase_name(step),
             "components": obs.reward_components or {},
             "playbook_version": env.state.playbook_version,

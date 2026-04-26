@@ -1,7 +1,11 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
+
+os.environ.setdefault("MPLCONFIGDIR", str(Path(".matplotlib").resolve()))
+Path(os.environ["MPLCONFIGDIR"]).mkdir(parents=True, exist_ok=True)
 
 import matplotlib
 
@@ -119,10 +123,17 @@ def generate(metrics_path: Path | None = None) -> None:
     plt.savefig(out / "07_baseline_vs_trained.png")
     plt.close()
 
+    loss = [m.get("selection_loss_proxy", 0.0) for m in metrics]
+    plt.figure(figsize=(7, 4))
+    plt.plot(steps, loss, label="selection loss proxy", color="crimson")
+    plt.xlabel("Training step")
+    plt.ylabel("Loss proxy")
+    plt.title("Training loss proxy")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(out / "08_training_loss_proxy.png")
+    plt.close()
+
 
 if __name__ == "__main__":
-    import os
-
-    os.environ.setdefault("MPLCONFIGDIR", str(Path(".matplotlib").resolve()))
-    Path(os.environ["MPLCONFIGDIR"]).mkdir(parents=True, exist_ok=True)
     generate()
